@@ -1,0 +1,111 @@
+% Chapter 9 - Conclusions
+\input{Preamble}
+\begin{document}
+
+\chapter{\textbf{CONCLUDING REMARKS}}
+\label{ch9}
+
+\section{Contributions and Conclusions}
+
+There has been a great deal of research dedicated to develop term-weighting models for information retrieval (IR). 
+However, IR research has shown that there is not a single term-weighting model that would answer the best on any query.
+Rather, per-query performance fluctuation among the term-weighting models has been shown.
+This is called robustness problem of IR.
+This dissertation has investigated the selective application of an appropriate term-weighting model on a per-query basis to alleviate the problem of robustness in retrieval effectiveness.
+The objective of this dissertation is to characterize queries based on frequency distributions of their terms on document collections and try to predict which term-weighting model would be most effective for each query.
+Thus, when an unseen query is submitted by the user, our approach will decide which term-weighting model should process it.
+This section discusses the contributions and conclusions of this dissertation.
+
+\subsection{Contributions}
+The main contributions of this dissertation are the introduction of the STW framework and the proposed use of chi-square goodness-of-fit test  
+on frequency distributions of query terms for identifying similar queries.
+In addition, this dissertation draws insights from a large set of experiments, involving three different standard corpora, two different search tasks, two different document representations and two different effectiveness measures calculated at various cutoff levels.
+This illustrates the generalizability of the STW framework.
+
+Furthermore, we thoroughly evaluate the accuracy, effectiveness and robustness of the STW framework on two different retrieval tracks, namely Web Track and Million Query Track.
+In particular, a Web collection that contains over a half billion English documents and about one thousand queries are used in this evaluation.
+
+This study makes some important contributions to the body of existing work in both selective IR and robust IR. 
+This dissertation presents experiments of the selective term-weighting for robust retrieval based on frequency distributions of query terms. 
+This is the first examination of the frequency distributions of query terms on document collections in text-based IR. 
+This has not been done before. 
+As a by-product, a new family of query features can be driven from the frequency distribution of query terms for to use in IR research area.
+
+This work presents a unique evaluation methodology for selective retrieval approaches when there exist multiple candidates to choose from.
+Three aspects of such evaluation: accuracy, effectiveness and robustness are considered at the same time.
+Two natural baselines that any selective retrieval approach should outperform at the minimum are derived and described.
+
+The present dissertation also reveals the organic connection between the selective IR and the robust IR that focused on avoiding significant failures caused by the poorly-performing queries. 
+This connection has much to do with the true understanding/definition of a significant failure, and an appreciation of it helps to gain insight into the selective retrieval approach.
+Indeed, significant failure is a vague concept. 
+When does a retrieval system fail significantly?
+Can an effectiveness score of 0.2 or 0.6 be considered a failure for a particular query?
+
+Whether a system performs poorly or not can only be meaningfully identified when it is \emph{relatively} compared to the \emph{other} systems.
+For example, a system serves a query with the NDCG score of 0.6 and all the other systems attain NDCG score greater than 0.7. 
+Since the model in question is the least effective, we can call NDCG score of 0.6 a significant failure.
+On the other hand, a system can be the most effective with an NDCG score of 0.2 when the other systems return zero relevant documents.
+Obviously NDCG score of 0.2 is not a significant failure in this case.
+
+These examples clearly demonstrate that significant failure must be defined in a relative manner.
+There must be other systems to compare with. 
+The magnitude of an effectiveness score alone is not enough to define it. 
+This is where selective retrieval approaches come into play.
+The interesting relationship between the selective retrieval approaches and the problem of robustness in retrieval effectiveness is that the selective approaches are natural solutions to the robustness problem.
+
+
+\subsection{Conclusions}
+This section discusses the achievements and the conclusions of this study.
+We tested our selective term weighting (STW) framework on the ClueWeb\{09\textbar12\} corpora and their corresponding TREC tasks.
+In particular, we compared it with two random selection mechanisms as well as eight state-of-the-art term-weighting models, namely BM25, DFIC, DLH13, DPH, DFRee, PL2, LGD and the Language Modeling method with Dirichlet prior smoothing.
+The experimental results showed that, our selective term-weighting approach does improve the average effectiveness compared with a baseline where a single term-weighting model is applied uniformly to all queries.
+
+Our experimental results showed that the retrieval performance obtained by using our proposed STW framework could constantly outperform random selections and eight state-of-the-art models in the NDCG and MAP measures on different datasets. 
+In addition, improvements were statistically significant in most cases.
+
+Moreover, we investigated the robustness of our framework as measured by the GeoRisk.
+Our experimental results showed that the STW framework is a truly robust system, which avoids significant per-query failures and also maintains a good average effectiveness at the same time.
+We showed that more robust and more effective system can be built by leveraging existing term-weighting models in a selective manner, without inventing a new one.
+The STW framework reached to a level of robustness that any single term-weighting cannot posses alone.
+
+Furthermore, we showed that the queries that a system fails is as important as the queries that a system succeeds in a selective IR application.
+We also empirically validated that the anchor text 100\% obeys the fundamental assumption of the frequentist approach to IR.
+Finally, we compared our selective term-weighting method with a previous study by \citet{ModelSelection}, in which experimental results show that our approach performs better for the ClueWeb09 dataset. 
+
+\section{Directions for Future Research}
+This section discusses several directions for future work related to, or stemming from this dissertation.
+
+\paragraph{Query features based on term frequency distributions}
+
+The most common term statistics currently used in the IR literature are as follows: 
+ 
+\begin{itemize}
+  \item Document frequency: How many documents contain the term?
+  \item Within-collection term frequency: How many times the term is observed in the entire collection?
+  \item Number of documents: How many documents do exist in the entire collection?
+  \item Number of terms: How many terms do exist in the entire collection?
+\end{itemize}
+
+These statistics has been leveraged in IDF and ICTF to quantify term specificity.
+IDF is the logarithmically scaled inverse fraction of the documents that contain the word and the total number of documents.
+ICTF simply uses ``the number of terms'' instead of the number of documents, thus ICTF is the ``\# terms'' counter part of the IDF.
+Basically they both are based on the mean of the frequency distribution of the term in the collection.
+However, there are three more statistics that can describe a frequency distribution of a term.
+The four central moments used in mathematics and statistics are as follows: 
+\begin{itemize}
+  \item \textbf{Mean} is the first raw moment.
+  \item \textbf{Variance} measures how far a set of numbers are spread out from their mean.
+  \item \textbf{Skewness} is the measure of the lopsidedness of the distribution.
+  \item \textbf{Kurtosis} is the measure of the heaviness of the tail of the distribution.
+\end{itemize}
+
+\citet*{Variance} argue that the term frequency distribution is pertinent to informativeness and the most informative terms tend to be those whose within-document frequency has high variance across a document collection.
+The authors propose use of relative standard deviation as a measure of term specificity.
+
+To the best of our knowledge, unlike the mean and variance \citep{Variance}, skewness and kurtosis have not ben utilized yet in the IR literature.
+The computation of these features is more costly than IDF and ICTF, but they can obviously be included/used to describe terms in various IR tasks, such as query classification and learning to rank.
+This new family of features based on term frequency distribution are waiting to be exploited by the IR community.
+
+\bibliographystyle{elsarticle-harv}
+\bibliography{References}
+\end{document}

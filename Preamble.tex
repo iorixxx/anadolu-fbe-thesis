@@ -1,0 +1,131 @@
+\documentclass[a4paper,12pt,oneside,authoryear]{report}
+\usepackage{natbib}
+\usepackage[latin5]{inputenc}
+\usepackage{amsmath}
+\usepackage{MnSymbol}
+\usepackage{wasysym}
+\usepackage{algpseudocode}
+\usepackage{multirow}
+\usepackage[font={small},format=hang,labelfont=bf,justification=justified,singlelinecheck=false]{caption}
+\usepackage{epsfig}
+\usepackage[subfigure,titles]{tocloft}
+\usepackage[tight,footnotesize]{subfigure}
+\usepackage{array}
+\usepackage{epigraph}
+\usepackage{url}
+\usepackage{fixltx2e}
+\usepackage{siunitx}
+\usepackage{listings}
+\usepackage{csquotes}
+\usepackage{lscape}
+\usepackage{algorithm2e}
+\newcommand*\pct{\scalebox{.9}{\%}}
+\usepackage[maxfloats=25]{morefloats}
+\usepackage[shortlabels]{enumitem}
+% margins - 3.5cm from left, 2.5 cm from right, 3cm from top, and 2.5cm from bottom 
+\usepackage[top=30mm, bottom=25mm, left=35mm, right=25mm]{geometry}
+\usepackage{hyperref}
+\usepackage[labelsep=period]{caption}
+
+
+\usepackage{color}
+\definecolor{gray}{rgb}{0.4,0.4,0.4}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.6}
+\definecolor{cyan}{rgb}{0.0,0.6,0.6}
+\definecolor{lightpurple}{rgb}{0.8,0.8,1}
+
+\newcommand*\ac{[}
+\newcommand*\kapa{]}
+
+
+\lstdefinelanguage{XML}
+{
+  morestring=[b]",
+    showstringspaces=false,
+  morestring=[s]{>}{<},
+  morecomment=[s]{<?}{?>},
+  stringstyle=\color{black},
+  identifierstyle=\color{cyan},
+  keywordstyle=\color{darkblue},
+  morekeywords={topic,query,description}% list your attributes here
+}
+
+% set line spacing to 1.5
+\usepackage{setspace}
+\onehalfspacing
+
+
+\pagestyle{plain}
+\setlength{\parskip}{2mm}
+\setlength{\itemsep}{1mm}
+\setcounter{page}{1}
+\parindent 10mm
+
+\usepackage[english]{babel}
+\usepackage{titlesec}
+\newcommand{\hsp}{\hspace{0pt}}
+\titleformat{\chapter}[hang]{\large\bfseries}{\thechapter\hsp{.}\hsp}{10pt}{\large\bfseries}
+\titlespacing*{\chapter}{0pt}{0pt}{0pt}
+\titleformat{\section}[hang]{\large\bfseries}{\thesection\hsp{.}\hsp}{10pt}{\large\bfseries}
+\titlespacing*{\section}{0pt}{0pt}{0pt}
+\titleformat{\subsection}[hang]{\normalsize\bfseries}{\thesubsection\hsp{.}\hsp}{10pt}{\normalsize\bfseries}
+\titlespacing*{\subsection}{0pt}{0pt}{0pt}
+
+
+
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+\cftsetindents{section}{1.6em}{2.8em}
+\cftsetindents{subsection}{4.4em}{3.8em}
+
+
+\renewcommand{\cftfigfont}{\textbf{Figure} }
+\renewcommand{\cfttabfont}{\textbf{Table} }
+
+\renewcommand{\cftfigaftersnum}{.}
+\renewcommand{\cfttabaftersnum}{.}
+
+
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}} % for chapters
+
+
+\renewcommand{\cftchapaftersnum}{.}
+\renewcommand{\cftsecaftersnum}{.}
+\renewcommand{\cftsubsecaftersnum}{.}
+
+\renewcommand\cftchappagefont{\bfseries}
+\renewcommand\cftsecpagefont{\bfseries}
+\renewcommand\cftsubsecpagefont{\bfseries}
+
+\renewcommand{\cftchapleader}{\bfseries\cftdotfill{\cftsecdotsep}}% dot leaders in bold
+\renewcommand{\cftsecleader}{\bfseries\cftdotfill{\cftsecdotsep}}% dot leaders in bold
+\renewcommand{\cftsubsecleader}{\bfseries\cftdotfill{\cftsecdotsep}}% dot leaders in bold
+
+
+\cftsetindents{figure}{0em}{3.0em}
+\cftsetindents{table}{0em}{3.0em}
+
+\AtBeginDocument{%
+\addtocontents{toc}{~\hfill\textbf{\underline{Page}}\par}
+\addtocontents{lof}{~\hfill\textbf{\underline{Page}}\par}
+\addtocontents{lot}{~\hfill\textbf{\underline{Page}}\par}
+}
+
+\makeatletter
+\g@addto@macro\cfttabpresnum{\bfseries} % make figure number bold in 'list of figures'
+\g@addto@macro\cftfigpresnum{\bfseries}  % make table number bold in 'list of table'
+
+\g@addto@macro\cftsecfont{\bfseries}
+\g@addto@macro\cftsubsecfont{\bfseries}
+\g@addto@macro\cftparafont{\bfseries}
+\g@addto@macro\cftsubparafont{\bfseries}
+%\g@addto@macro\cftfigfont{\bfseries}
+%\g@addto@macro\cfttabfont{\bfseries}
+
+\g@addto@macro\cftsecpagefont{\bfseries}
+\g@addto@macro\cftsubsecpagefont{\bfseries}
+\g@addto@macro\cftparapagefont{\bfseries} 
+\g@addto@macro\cftsubparapagefont{\bfseries}
+%\g@addto@macro\cftfigpagefont{\bfseries}
+%\g@addto@macro\cfttabpagefont{\bfseries}
+\makeatother

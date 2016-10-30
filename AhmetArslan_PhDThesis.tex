@@ -1,0 +1,55 @@
+\input{Preamble}
+
+\begin{document}
+
+\input{CoverPage}
+\input{juriEn}
+\input{Abstract}
+\input{Ozet}
+\input{Acknowledgments}
+\input{EthicsEN}
+
+\newpage
+\addcontentsline{toc}{chapter}{TABLE OF CONTENTS}
+\renewcommand{\contentsname}{\centerline{CONTENTS}}
+\renewcommand{\cfttoctitlefont}{\bfseries}
+\tableofcontents
+
+\newpage
+\addcontentsline{toc}{chapter}{LIST OF TABLES}
+\renewcommand{\listtablename}{\centerline{LIST OF TABLES}}
+\listoftables
+
+\newpage
+\addcontentsline{toc}{chapter}{LIST OF FIGURES}
+\renewcommand{\listfigurename}{\centerline{LIST OF FIGURES}}
+\listoffigures
+
+\newpage
+\addcontentsline{toc}{chapter}{GLOSSARY OF SYMBOLS AND ABBREVIATIONS}
+\input{Abbreviations}
+
+\newpage
+\pagenumbering{arabic}
+\input{StrippedChapter1}
+\input{StrippedChapter2}
+\input{StrippedChapter3}
+\input{StrippedChapter9}
+
+\addcontentsline{toc}{chapter}{REFERENCES}
+\bibliographystyle{elsarticle-harv}
+\renewcommand{\bibname}{\centerline{REFERENCES}}
+
+\begin{spacing}{1.0}
+\bibliography{StrippedReferences}
+\end{spacing}
+
+\appendix
+
+\chapter*{\textbf{\centerline{R\'{E}SUM\'{E}}}}
+\addcontentsline{toc}{chapter}{R\'{E}SUM\'{E}}
+
+\input{Resume}
+
+\end{document} 
+

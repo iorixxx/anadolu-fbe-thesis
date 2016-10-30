@@ -1,0 +1,132 @@
+% Chapter 3 - Related Work
+\input{Preamble}
+\begin{document}
+
+\chapter{\textbf{RELATED WORK}}
+\label{ch3}
+
+\section{Introduction}
+The previous chapter presented the general background and preliminaries on Information Retrieval (IR).
+In this chapter, we review the two lines of research that provide the necessary context for the present dissertation: (\emph{i}) Query Performance Prediction (QPP) and (\emph{ii}) Selective Information Retrieval (SIR).
+Although the present dissertation is not directly related to QPP, we include a brief review of QPP because certain selective retrieval approaches are based on it.
+
+\section{Query Performance Prediction}
+
+Estimating the effectiveness of a search performed in response to a query in the \emph{absence of relevance judgments} is the goal of query-performance prediction methods.
+Estimating the query difficulty is an important field of study since it enables IR systems to identify \emph{difficult} queries in order to handle them properly. 
+Thus, search engines will reduce the variance in performance, resulting in better retrieval robustness.
+In this section, we describe the query performance prediction (also referred to as query difficulty estimation) problem and the most successful approaches for this problem in the literature.
+Following QPP studies' summarizations are based heavily on the book written by \citet*{carmel2010estimating}. 
+QPP methods can be studied in two categories : pre-retrieval and post-retrieval.
+
+\subsection{Pre-retrieval predictors} 
+Pre-retrieval predictors estimate the performance of a query before the retrieval takes place, thus, independent of the result list.
+By contrast, they are collection dependent and analyze the distribution of the query term frequencies within the collection.
+The inverse document frequency (IDF) and the inverse collection term frequency (ICTF) are frequently used term statistics.
+The IDF\textsubscript{avg} and the ICTF\textsubscript{avg} predictors measure the average of the IDF and ICTF values of the query terms.
+The assumption is that queries with high average value, i.e., queries composed of infrequent terms, are easier to satisfy. 
+
+\citet*{InferringQP} study a set of predictors of query performance, which can be generated prior to the retrieval process.
+The linear and non-parametric correlations of the predictors with query performance are thoroughly assessed on the TREC disk4 and disk5 (minus CR) collections.
+Their research revealed that  some of the proposed predictors have significant correlation with query performance, showing that these predictors can be useful to infer query performance in practical applications.
+
+\citet*{preVar} propose a new family of pre-retrieval predictors based on information at both the collection and document level.
+The \emph{collection query similarity} predictor measures the vector-space based query similarity to the collection, while considering the collection as a one large document composed of concatenation of all the documents. The \emph{VAR(t)} predictor measures the variance of the term weights over the documents containing it in the collection. 
+The weight of a term that occurs in a document is determined by the specific term-weighting model. 
+If the variance of the term weight distribution is low, then the retrieval system will be less able to differentiate between highly relevant and less relevant documents, and the query is tend to be more difficult. 
+
+\citet*{preSurvey}, in their survey, categorize and assess 22 pre-retrieval predictors on three different TREC test collections.
+
+\subsection{Post-retrieval predictors}
+Post-retrieval predictors require the computation of result list and relevance scores for the query, which is time-consuming. 
+However, these methods are more suitable for identifying inconsistency, incoherency, and other characteristics that reflect low quality. 
+
+The pioneering work of \citet*{clarity} gave rise to query difficulty estimation research. They develop a method for predicting query performance by computing the relative entropy between a query language model and the corresponding collection language model. The resulting \emph{clarity score} measure was the very first query performance predictor. After 10 years, \citet*{clarityRe} presented novel interpretation of \emph{clarity score} and showed that it actually quantifies diversity property of the result list. Their study, along with empirical evaluation, explained the low prediction quality of clarity score for large-scale Web collections.
+
+\citet*{Yom05} won SIGIR'05 best paper award with their ``Learning to estimate query difficulty'' titled work. They tried to identify \emph{difficult} queries that return poor results, and list several useful use-case scenarios for detection. Estimation is based on the agreement between the top results of the full query and the top results of its sub-queries.  
+
+\citet*{qf} proposed \emph{Query Feedback} for measuring the robustness of the result list to small modifications of the query.
+If small changes to the query result in large changes to the search results, then the query is considered difficult.
+
+The \emph{Weighted Information Gain} \citep{qf} measures the divergence between the mean retrieval score of top-ranked documents and that of the entire corpus. 
+The \emph{Normalized Query Commitment} \citep{nqc} measures the normalized standard deviation of the top scores.
+
+\section{Selective Information Retrieval}
+Classical/traditional (non-selective) IR approaches apply a particular technique uniformly to all queries. 
+In contrast, selective retrieval approaches deal with applying different retrieval techniques for different queries. 
+Various selective retrieval approaches have previously been proposed in the literature. 
+In this section, comprehensive survey of existing selective retrieval approaches is given in chronological order.
+Following SIR studies' summarisations are based heavily on the contents (abstract, introduction, and conclusion) of the cited original works.
+
+\subsection{Query type classification}
+Query type classification classifies a query into one of a set of target types (e.g. informational, navigational, or transactional), and then selectively applies a retrieval model trained for the predicted type. For instance, \citet*{QueryTypeClassification} showed that different query types can benefit from the application of different retrieval approaches.
+
+\subsection{Selective weighting function}
+\citet{uglasgow.robust} tested selective weighting function approach to improving the effectiveness of poorly-performing quires at Robust Track of TREC.
+\citet{uglasgow.robust,ModelSelection} were the first to selectively apply a term-weighting model on a per-query basis and they referred to the problem/task as the \textbf{\emph{model selection}}.
+
+The DFR framework offers over the 50 different term-weighting models, but the framework does not have a strategy to single out one that would yield the best retrieval effectiveness for a given query.
+\citet{uglasgow.robust,ModelSelection} proposed a query-based pre-retrieval approach that automatically selects the best-performing retrieval model among 11 DFR models. 
+They cluster the queries according to their statistics and associate the best-performing term-weighting model to each cluster. 
+Their selective approach, which is detailed on Chapter \ref{sota}, does improve the poorly-performing queries compared to a baseline where a unique retrieval model is applied indifferently to all queries.
+
+\subsection{Selective query expansion}
+Automatic query expansion (AQE) works only for easy queries, i.e., when the search engine is able to rank high the relevant documents. 
+If this is not the case, AQE will add irrelevant terms, causing a decrease in performance. Thus, it is not beneficial to use AQE for every query. 
+Instead, it is advantageous to have a switch that will estimate when AQE will improve retrieval, and when it would be detrimental to it.
+\citet*{Amati04querydifficulty} set a threshold on the predicted difficulty, beyond which queries would be expanded. 
+In this approach, only ``easy'' queries, i.e., those with highly predicted performance, are expanded. 
+In contrast, a classifier was trained in \citep{Yom05} to identify queries for which pseudo relevance feedback might be beneficial, based on a training set where queries were assessed as to the increase or decrease in performance caused by expansion.
+
+\subsection{Selective document representation}
+\citet{SelTopicDist,SelectiveTopicDistillation} investigated the effectiveness of a decision mechanism for the selective combination of evidence in the context of topic distillation task,
+which is defined as finding useful entry points to sites that are relevant to the query topics.
+They used three different sources of evidence: textual content of documents, anchor text, and the length of the URL.
+They concluded that, the selective combination of evidence on a per-query basis can increase the retrieval effectiveness, compared to the uniform combination of evidence (irrespectively of the queries) for Web IR, and more specifically, for topic distillation.
+
+\subsection{Selective Web information retrieval}
+\citet*{plachouras2006selective}, in his PhD thesis, proposed a method to selectively apply an appropriate retrieval approach for a given query, which is based on a Bayesian decision mechanism. Features such as the link patterns in the retrieved document set and the occurrence of query terms in the documents were used to determine the applicability of the retrieval approaches. This method was shown to be effective when there were only two candidate retrieval approaches. However, the retrieval performance obtained using this method only improved slightly and actually decreased when more than two candidate retrieval approaches were used.
+
+\subsection{Selective personalization}
+Personalization only improves the results for some queries, and can actually harm other queries.
+\citet*{SelectivePersonalization} characterized queries by using a variety of features of the query, the results returned for the query, and people's interaction history with the query. 
+Using these features they learned Bayesian dependency networks to identify queries that can benefit from personalization.
+
+\subsection{Selective search engine}
+Any given Web search engine may provide higher quality results than others for certain queries. Therefore, it is in users' best interest to utilize multiple search engines.
+\citet*{SelectiveSearchEngine} propose and evaluate a framework that maximizes users' search effectiveness by directing them to the engine that yields the best results for the current query. Different from previous work on meta-search, they facilitate simultaneous use of individual engines. They describe a machine learning approach (maximum-margin averaged perceptron) to supporting switching between search engines (Google, Yahoo!, and Live Search) and demonstrate its viability at tolerable interruption levels. 
+
+\subsection{Query dependent ranking}
+\citet*{QueryDependentRanking} proposed a query-dependent ranking approach. They use soft classification that identifies similar queries from a training set. This is different than hard classification which classifies a query into a predefined target class. In their approach, a \emph{k}-nearest neighbor classifier was used to identify training queries similar to an unseen query. A retrieval model was then learnt based on the identified queries and applied to the unseen query.
+
+
+\subsection{Selective query-independent features}
+\citet*{SelectiveQIF} investigate a novel approach that applies the most appropriate query-independent feature on a per-query basis. The approach is based on an estimate of the divergence between the retrieved document scores' distributions prior to, and after the integration of a query-independent feature.  Experimental results demonstrate that the selective application of a query-independent feature on a per-query basis is very effective and robust.
+
+\subsection{Selective collection enrichment}
+\citet*{CollectionEnrichment} proposed a decision mechanism to decide whether or not to apply collection enrichment (CE) on a per query basis. A query performance predictor was used in decision. The approach is based on the predicted performance score of a given query on the local and external resources. In particular, the decision mechanism applies collection enrichment if and only if the predicted query performance score obtained on the external resource is higher than a threshold, as well as the predicted query performance score obtained using the local resource.
+
+\citet*{SelCE} we apply the divergence-based approach for selectively applying CE by examining the divergence between relevance score distributions prior to, and after the application of CE.
+To achieve this, they learn the distribution of divergence scores, which are estimated between two different lists of ranked documents obtained with and without the application of CE, using training data. 
+
+\subsection{Selective diversification}
+\citet*{Diversify} use a large pool of query features to choose between a more lenient or more aggressive diversification strategy on a per query basis.
+Thorough experiments using the TREC ClueWeb09 collection show that proposed selective approach can significantly outperform a uniform diversification for both classical and state-of-the-art diversification approaches.
+
+\subsection{Selective ranking function}
+\citet*{LTS}, in his PhD thesis, proposed the ``Learning to Select'' framework that selectively applies an appropriate ranking function on a per-query basis, regardless of the given query's type and the number of candidate ranking functions.
+
+\citet*{SelectRankingFunction} choose a ranking function from a large pool of candidate functions, based on their performance on neighboring training queries to an unseen query. The approach employs a query feature to identify similar training queries for an unseen query. A \emph{k}-nearest neighbor classifier was used to identify training query set and best ranking function which performs the best on this identified set is then chosen for the unseen query.
+
+\citet*{lsr} proposed the ``Ranker Selection'' framework that predicts the difference between the effectiveness of two rankers in terms of average precision.
+The experiments conducted on LETOR 3.0 dataset using three rankers (RankBoost, Regression, and Frank) show that, for selecting between two rankers, a simple regression model that directly predicts differences in effectiveness, can achieve substantial improvements over the best individual ranker.
+
+\subsection{Query dependent loss function}
+\citet*{QueryDependentLossFunction} propose to incorporate query difference into ranking by introducing query dependent loss functions. They compare query-dependent loss function to query-dependent ranking function. According to their study, query-dependent loss function outperforms. 
+
+\subsection{Selective pruning}
+\citet*{SelectivePruning} propose a novel selective framework that determines the appropriate amount of pruning aggressiveness on a per-query basis, thereby increasing overall efficiency without significantly reducing overall effectiveness. In their work, the authors aim to ensure effective and efficient retrieval, by selecting which queries should be pruned more aggressively.
+
+\bibliographystyle{elsarticle-harv}
+\bibliography{References}
+\end{document} 
