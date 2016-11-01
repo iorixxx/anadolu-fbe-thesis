@@ -19,4 +19,4 @@ P.S. Do not forget to use "actual size" option while printing the PDF file.
 Please feel free to contact Ahmet Arslan at `aarslan2@anadolu.edu.tr` if you have any questions, comments or contributions. 
 Please do not forget to give a star to the project if you use this template.
 
-P.S. I strongly suggest you to save your LaTeX files in a private GitHub repo, which is free with your university e-mail (`@anadolu.edu.tr`) address.
+P.S. I strongly suggest you to maintain your LaTeX files in a private GitHub repo, which is free with your university e-mail (`@anadolu.edu.tr`) address.
