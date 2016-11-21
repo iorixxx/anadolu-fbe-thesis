@@ -93,9 +93,6 @@
 \cftsetindents{subsection}{4.4em}{3.8em}
 
 
-\renewcommand{\cftfigfont}{\textbf{Figure} }
-\renewcommand{\cfttabfont}{\textbf{Table} }
-
 \renewcommand{\cftfigaftersnum}{.}
 \renewcommand{\cfttabaftersnum}{.}
 
@@ -126,6 +123,13 @@
 }
 
 \makeatletter
+
+\renewcommand{\cftfignumwidth}{7em}
+\renewcommand{\cftfigpresnum}{\textbf{Figure }}
+
+\renewcommand{\cfttabnumwidth}{6em}
+\renewcommand{\cfttabpresnum}{\textbf{Table }}
+
 \g@addto@macro\cfttabpresnum{\bfseries} % make figure number bold in 'list of figures'
 \g@addto@macro\cftfigpresnum{\bfseries}  % make table number bold in 'list of table'
 
